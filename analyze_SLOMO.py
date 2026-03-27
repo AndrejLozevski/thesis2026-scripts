@@ -312,7 +312,7 @@ if __name__ == '__main__':
 
     #==============================================================================================================#
 
-    for i in range(1,6):
+    for i in range(6):
         log.info('Analyzing dataset: %s', ddirs[i])
 
         rois, trcs, bmap, shape = _load_activity_data(ddirs[i])
@@ -361,23 +361,24 @@ if __name__ == '__main__':
         weights = np.repeat(weights, Rz//Rx, axis=0)
         bmap = np.repeat(bmap, Rz//Rx, axis=0)
 
-        plt.figure()
-        plt.imshow(bmap.max(axis=0), vmin=np.percentile(bmap, 50), vmax=np.percentile(bmap, 99), cmap='gray')
-        plt.imshow(weights.max(axis=0), cmap=RED_OVERLAY, alpha=0.8)
-        plt.savefig(pdir / 'example_SLOMO1.pdf')
-        plt.close()
-
-        plt.figure()
-        plt.imshow(bmap.max(axis=1), vmin=np.percentile(bmap, 50), vmax=np.percentile(bmap, 99), cmap='gray')
-        plt.imshow(weights.max(axis=1), cmap=RED_OVERLAY, alpha=0.8)
-        plt.savefig(pdir / 'example_SLOMO2.pdf')
-        plt.close()
-
-        plt.figure()
-        plt.imshow(bmap.max(axis=2), vmin=np.percentile(bmap, 50), vmax=np.percentile(bmap, 99), cmap='gray')
-        plt.imshow(weights.max(axis=2), cmap=RED_OVERLAY, alpha=0.8)
-        plt.savefig(pdir / 'example_SLOMO3.pdf')
-        plt.close()
+        if i == 1:
+            plt.figure()
+            plt.imshow(bmap.max(axis=0), vmin=np.percentile(bmap, 50), vmax=np.percentile(bmap, 99), cmap='gray')
+            plt.imshow(weights.max(axis=0), cmap=RED_OVERLAY, alpha=0.8)
+            plt.savefig(pdir / 'example_SLOMO1.pdf')
+            plt.close()
+    
+            plt.figure()
+            plt.imshow(bmap.max(axis=1), vmin=np.percentile(bmap, 50), vmax=np.percentile(bmap, 99), cmap='gray')
+            plt.imshow(weights.max(axis=1), cmap=RED_OVERLAY, alpha=0.8)
+            plt.savefig(pdir / 'example_SLOMO2.pdf')
+            plt.close()
+    
+            plt.figure()
+            plt.imshow(bmap.max(axis=2), vmin=np.percentile(bmap, 50), vmax=np.percentile(bmap, 99), cmap='gray')
+            plt.imshow(weights.max(axis=2), cmap=RED_OVERLAY, alpha=0.8)
+            plt.savefig(pdir / 'example_SLOMO3.pdf')
+            plt.close()
 
         #break
 
